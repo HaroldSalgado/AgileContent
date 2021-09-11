@@ -34,12 +34,11 @@ namespace CandidateTesting.HaroldJairSalgadoMarquez.Data.Facades
             var result = new List<string>();
 
 
-            var version = "#Version: " + _configuration.GetValue<string>("version");
-            result.Add(version);
-            var date = "#Date: " + DateTime.Now.ToString("dd/MM/yyyy H:mm:ss");
-            result.Add(date);
-            var headerFormat = "#Fields: provider http-method status-code uri-path time-taken response - size cache - status";
-            result.Add(headerFormat);
+            //var version = "#Version: " + _configuration.GetValue<string>("version");
+            var header = _configuration.GetValue<string>("header");
+            header = header.Replace("{{version}}", _configuration.GetValue<string>("version"))
+                .Replace("{{date}}", DateTime.Now.ToString("dd/MM/yyyy H:mm:ss"));
+            result.Add(header);
             foreach (var log in logs)
             {
                 var format = _configuration.GetValue<string>("format");

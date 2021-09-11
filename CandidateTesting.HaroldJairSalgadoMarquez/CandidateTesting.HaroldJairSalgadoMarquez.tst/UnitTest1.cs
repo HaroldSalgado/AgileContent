@@ -28,7 +28,8 @@ namespace CandidateTesting.HaroldJairSalgadoMarquez.test
             var inMemorySettings = new Dictionary<string, string> {
             {"version", "1.0"},
             {"format", "\"{{provider}}\" {{http-method}} {{status-code}} {{uri-path}} {{time-taken}} {{response-size}} {{cache-status}}"},
-            {"provider","MINHA CDN" } };
+            {"provider","MINHA CDN" }, 
+            {"header","#Version: {{version}}\r\n#Date: {{date}}\r\n#Fields: provider http-method status-code uri-path time-taken response - size cache - status"} };
 
             _mockAppConfiguration = new ConfigurationBuilder()
                 .AddInMemoryCollection(inMemorySettings)
