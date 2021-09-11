@@ -25,10 +25,19 @@ namespace CandidateTesting.HaroldJairSalgadoMarquez.Data.Facades
         public void WriteLogFile(List<LogModel> logs, string path)
         {
             var result = new List<string>();
+
+
+            //TODO: move to settings
+            var version = "#Version: 1.0";
+            result.Add(version);
+            var date = "#Date: " + DateTime.Now.ToString("dd/MM/yyyy H:mm:ss");
+            result.Add(date);
+            var headerFormat = "#Fields: provider http-method status-code uri-path time-taken response - size cache - status";
+            result.Add(headerFormat);
             foreach (var log in logs)
             {
-                //TODO: Move to settings file
                 var format = "\"{{provider}}\" {{http-method}} {{status-code}} {{uri-path}} {{time-taken}} {{response-size}} {{cache-status}}";
+                //TODO: Move to settings file
                 var stringLog =
                     format.Replace("{{provider}}", log.Provider)
                     .Replace("{{http-method}}", log.HttpMethod)
