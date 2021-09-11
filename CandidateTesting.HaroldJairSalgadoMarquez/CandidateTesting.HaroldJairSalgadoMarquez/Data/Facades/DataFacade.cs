@@ -1,5 +1,6 @@
 ﻿using CandidateTesting.HaroldJairSalgadoMarquez.Data.Facades.Interfaces;
 using CandidateTesting.HaroldJairSalgadoMarquez.Models;
+using Microsoft.Extensions.Configuration;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,12 @@ namespace CandidateTesting.HaroldJairSalgadoMarquez.Data.Facades
 {
     public class DataFacade: IDataFacade
     {
+        private IConfiguration _configuration;
+
+        public DataFacade(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
         public string GetStringLogsFromURL(string source)
         {
             string result = null;
@@ -27,8 +34,7 @@ namespace CandidateTesting.HaroldJairSalgadoMarquez.Data.Facades
             var result = new List<string>();
 
 
-            //TODO: move to settings
-            var version = "#Version: 1.0";
+            var version = "#Version: " + _configuration.GetValue<string>("version");
             result.Add(version);
             var date = "#Date: " + DateTime.Now.ToString("dd/MM/yyyy H:mm:ss");
             result.Add(date);
@@ -36,7 +42,7 @@ namespace CandidateTesting.HaroldJairSalgadoMarquez.Data.Facades
             result.Add(headerFormat);
             foreach (var log in logs)
             {
-                var format = "\"{{provider}}\" {{http-method}} {{status-code}} {{uri-path}} {{time-taken}} {{response-size}} {{cache-status}}";
+                var format = _configuration.GetValue<string>("format");
                 //TODO: Move to settings file
                 var stringLog =
                     format.Replace("{{provider}}", log.Provider)

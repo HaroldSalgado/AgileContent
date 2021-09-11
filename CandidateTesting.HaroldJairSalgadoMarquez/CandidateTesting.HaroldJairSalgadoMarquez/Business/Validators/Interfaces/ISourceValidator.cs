@@ -1,6 +1,6 @@
 ﻿namespace CandidateTesting.HaroldJairSalgadoMarquez.Business.Validators.Interfaces
 {
-    interface ISourceValidator
+    public interface ISourceValidator
     {
         bool ValidateSourceString(string source);
     }

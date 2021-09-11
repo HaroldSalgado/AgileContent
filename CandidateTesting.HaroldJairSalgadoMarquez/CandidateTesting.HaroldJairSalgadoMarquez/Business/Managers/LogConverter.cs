@@ -1,13 +1,20 @@
 ﻿using CandidateTesting.HaroldJairSalgadoMarquez.Business.Managers.Interfaces;
 using CandidateTesting.HaroldJairSalgadoMarquez.Models;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace CandidateTesting.HaroldJairSalgadoMarquez.Business.Managers
 {
-    class LogConverter: ILogConverter
+    public class LogConverter: ILogConverter
     {
+        private IConfiguration _configuration;
+
+        public LogConverter(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
         public List<LogModel> MapLogsFromString(string source)
         {
             var result = new List<LogModel>();
@@ -19,7 +26,7 @@ namespace CandidateTesting.HaroldJairSalgadoMarquez.Business.Managers
                 {
                     var data = row.Split('|');
                     //TODO: Move to settings file
-                    var provider = "MINHA CDN";
+                    var provider = _configuration.GetValue<string>("provider");
                     var statusCode = data[1];
                     var timeTaken = data[4];
                     var dotIndex = timeTaken.IndexOf('.');

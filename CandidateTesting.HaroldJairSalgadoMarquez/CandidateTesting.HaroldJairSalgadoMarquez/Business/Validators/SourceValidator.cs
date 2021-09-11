@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CandidateTesting.HaroldJairSalgadoMarquez.Business.Validators
 {
-    class SourceValidator: ISourceValidator
+    public class SourceValidator: ISourceValidator
     {
         public bool ValidateSourceString(string source)
         {
