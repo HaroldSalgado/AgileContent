@@ -6,6 +6,6 @@ namespace CandidateTesting.HaroldJairSalgadoMarquez.Data.Facades.Interfaces
     interface IDataFacade
     {
         string GetStringLogsFromURL(string source);
-        void WriteLogFile(List<LogModel> logs);
+        void WriteLogFile(List<LogModel> logs, string path);
     }
 }

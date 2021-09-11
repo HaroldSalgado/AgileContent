@@ -26,7 +26,7 @@ namespace CandidateTesting.HaroldJairSalgadoMarquez.Business.Managers
                     var mappedLogs = _logConverter.MapLogsFromString(stringLogs);
                     if (mappedLogs.Count > 0)
                     {
-                        _datafacade.WriteLogFile(mappedLogs);
+                        _datafacade.WriteLogFile(mappedLogs, target);
                     }
                 }
             }

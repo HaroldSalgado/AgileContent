@@ -33,6 +33,7 @@ namespace CandidateTesting.HaroldJairSalgadoMarquez
                         }).Build();
 
                     var applicationManagerService = ActivatorUtilities.CreateInstance<ApplicationManager>(host.Services);
+
                     var source = args[1];
                     var target = args[2];
                     applicationManagerService.ConvertLogs(source, target);

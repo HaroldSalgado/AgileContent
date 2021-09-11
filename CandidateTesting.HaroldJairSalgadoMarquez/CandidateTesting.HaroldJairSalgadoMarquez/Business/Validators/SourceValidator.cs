@@ -11,7 +11,9 @@ namespace CandidateTesting.HaroldJairSalgadoMarquez.Business.Validators
     {
         public bool ValidateSourceString(string source)
         {
-            var result = false;
+            Uri uriResult;
+            bool result = Uri.TryCreate(source, UriKind.Absolute, out uriResult)
+                && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
             return result;
         }
     }
